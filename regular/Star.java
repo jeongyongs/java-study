@@ -1,0 +1,19 @@
+package regular;
+
+public final class Star implements Expression {
+
+    private Expression expression;
+
+    public Star(Expression expression) {
+        this.expression = expression;
+    }
+
+    public Expression getExpression() {
+        return expression;
+    }
+
+    @Override
+    public String prettyPrint() {
+        return "(" + expression.prettyPrint() + ")*";
+    }
+}
