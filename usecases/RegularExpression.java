@@ -4,6 +4,7 @@ import regular.Epsilon;
 import regular.Expression;
 import regular.Literal;
 import regular.Or;
+import regular.Plus;
 import regular.Star;
 import regular.Then;
 
@@ -25,5 +26,8 @@ public final class RegularExpression {
         System.out.println(ba_a0n.prettyPrint());
         ba_a0n = b.then(a).or(Epsilon.getInstance().or(a.star())); // sugar syntax
         System.out.println(ba_a0n.prettyPrint());
+
+        Expression plus = new Plus(a_ab, ba_a0n);
+        System.out.println(plus.prettyPrint());
     }
 }

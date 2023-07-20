@@ -16,6 +16,6 @@ public final class Epsilon implements Expression {
 
     @Override
     public String prettyPrint() {
-        return "";
+        return "\u03B5";
     }
 }

@@ -2,24 +2,14 @@ package regular;
 
 public final class Then implements Expression {
 
-    private Expression left;
-    private Expression right;
+    private BinaryOperator binaryOperator; // delegator
 
     public Then(Expression left, Expression right) {
-        this.left = left;
-        this.right = right;
-    }
-
-    public Expression getLeft() {
-        return left;
-    }
-
-    public Expression getRight() {
-        return right;
+        binaryOperator = new BinaryOperator(left, right, "");
     }
 
     @Override
     public String prettyPrint() {
-        return "(" + left.prettyPrint() + right.prettyPrint() + ")";
+        return binaryOperator.prettyPrint();
     }
 }

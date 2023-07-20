@@ -14,5 +14,5 @@ public interface Expression {
         return new Star(this);
     }
 
-    public abstract String prettyPrint();
+    public String prettyPrint();
 }
