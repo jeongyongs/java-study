@@ -5,7 +5,6 @@ import regular.Expression;
 import regular.Literal;
 import regular.Literals;
 import regular.Plus;
-import regular.PrettyPrinter;
 
 public final class RegularExpression {
 
