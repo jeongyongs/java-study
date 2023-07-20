@@ -2,47 +2,46 @@ package usecases;
 
 interface Top {
     default void accept(Visitor v) {
+        printDirection();
         v.visit(this);
     }
+
+    void printDirection();
 }
 
 class Left implements Top {
+    @Override
+    public void printDirection() {
+        System.out.print("왼쪽으로 ");
+    }
 }
 
 class Right implements Top {
+    @Override
+    public void printDirection() {
+        System.out.print("오른쪽으로 ");
+    }
 }
 
 interface Visitor {
-    default void visit(Top top) {
-        throw new NoSuchMethodError();
-    }
-
-    void visit(Left left);
-
-    void visit(Right right);
+    void visit(Top top);
 }
 
 class 걸어 implements Visitor {
-    public void visit(Left left) {
-        System.out.println("왼쪽으로 걸어");
-    };
-
-    public void visit(Right right) {
-        System.out.println("오른쪽으로 걸어");
+    @Override
+    public void visit(Top top) {
+        System.out.println("걸어");
     }
 }
 
 class 뛰어 implements Visitor {
-    public void visit(Left left) {
-        System.out.println("왼쪽으로 뛰어");
-    };
-
-    public void visit(Right right) {
-        System.out.println("오른쪽으로 뛰어");
+    @Override
+    public void visit(Top top) {
+        System.out.println("뛰어");
     }
 }
 
-class 실험 {
+public class 실험 {
     public static void main(String[] args) {
         Top leftTop = new Left();
         Top rightTop = new Right();
