@@ -13,7 +13,7 @@ public final class Star implements Expression {
     }
 
     @Override
-    public String prettyPrint() {
-        return "(" + expression.prettyPrint() + ")*";
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

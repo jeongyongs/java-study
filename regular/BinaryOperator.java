@@ -4,12 +4,10 @@ public class BinaryOperator {
 
     private Expression left;
     private Expression right;
-    private String symbol;
 
-    public BinaryOperator(Expression left, Expression right, String symbol) { // constructor
+    public BinaryOperator(Expression left, Expression right) { // constructor
         this.left = left;
         this.right = right;
-        this.symbol = symbol;
     }
 
     public Expression getLeft() { // getter
@@ -18,10 +16,6 @@ public class BinaryOperator {
 
     public Expression getRight() {
         return right;
-    }
-
-    public String prettyPrint() {
-        return "(" + left.prettyPrint() + symbol + right.prettyPrint() + ")";
     }
 }
 

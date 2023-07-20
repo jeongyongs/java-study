@@ -3,31 +3,23 @@ package usecases;
 import regular.Epsilon;
 import regular.Expression;
 import regular.Literal;
-import regular.Or;
+import regular.Literals;
 import regular.Plus;
-import regular.Star;
-import regular.Then;
+import regular.PrettyPrinter;
 
 public final class RegularExpression {
 
-    private RegularExpression() {
+    private RegularExpression() { // prevent new
     };
 
     public static void main(String[] args) {
         Literal a = new Literal('a');
         Literal b = new Literal('b');
 
-        Expression a_ab = new Or(a, new Then(a, b));
-        System.out.println(a_ab.prettyPrint());
-        a_ab = a.or(a.then(b)); // sugar syntax
-        System.out.println(a_ab.prettyPrint());
-
-        Expression ba_a0n = new Or(new Then(b, a), new Or(Epsilon.getInstance(), new Star(a)));
-        System.out.println(ba_a0n.prettyPrint());
-        ba_a0n = b.then(a).or(Epsilon.getInstance().or(a.star())); // sugar syntax
-        System.out.println(ba_a0n.prettyPrint());
-
+        Expression a_ab = a.or(a.then(b)); // sugar syntax
+        Expression ba_a0n = b.then(a).or(Epsilon.getInstance().or(a.star())); // sugar syntax
         Expression plus = new Plus(a_ab, ba_a0n);
-        System.out.println(plus.prettyPrint());
+
+        System.out.println(Literals.of(plus));
     }
 }

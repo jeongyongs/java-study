@@ -14,5 +14,5 @@ public interface Expression {
         return new Star(this);
     }
 
-    public String prettyPrint();
+    void accept(Visitor visitor);
 }

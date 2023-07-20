@@ -15,7 +15,7 @@ public final class Epsilon implements Expression {
     }
 
     @Override
-    public String prettyPrint() {
-        return "\u03B5";
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

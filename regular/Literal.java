@@ -13,7 +13,7 @@ public final class Literal implements Expression { // invariable condition
     }
 
     @Override
-    public String prettyPrint() {
-        return "" + literal;
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }
