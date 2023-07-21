@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class HowToDefineOrAll {
 
-    public static Expression orAll(String literals) {
+    public static Expression orAll(String literals) { // orAll
         List<Expression> expressionList = new LinkedList<Expression>();
 
         for (int i = 0, n = literals.length(); i < n; i++) {
@@ -18,7 +18,7 @@ public class HowToDefineOrAll {
         return orAll(expressionList);
     }
 
-    public static Expression orAll(Iterable<Expression> expressions) {
+    public static Expression orAll(Iterable<Expression> expressions) { // orAll
         Expression orExpression = Epsilon.getInstance();
 
         for (Expression expression : expressions)
@@ -27,24 +27,22 @@ public class HowToDefineOrAll {
         return orExpression;
     }
 
-    public static Expression orStream(String literals) {
+    public static Expression orStream(String literals) { // onStream
         List<Expression> expressionList = new ArrayList<Expression>();
-        Expression orExpression = Epsilon.getInstance();
 
-        expressionList.add(orExpression);
         for (int i = 0, n = literals.length(); i < n; i++) {
             expressionList.add(new Literal(literals.charAt(i)));
         }
         return orStream(expressionList.stream());
     }
 
-    public static Expression orStream(Stream<Expression> expressions) {
-        return expressions.reduce((e1, e2) -> e1.or(e2)).get();
+    public static Expression orStream(Stream<Expression> expressions) { // onStream
+        return expressions.reduce(Epsilon.getInstance(), (e1, e2) -> e1.or(e2));
     }
 
     private static <ReturnType> ReturnType operationWithElapsedTimeInMillis(
             String doSomething,
-            Supplier<ReturnType> delayedOperation) {
+            Supplier<ReturnType> delayedOperation) { // check running time
 
         long startTime = Calendar.getInstance().getTimeInMillis();
         ReturnType returnValue = delayedOperation.get();
@@ -54,7 +52,7 @@ public class HowToDefineOrAll {
         return returnValue;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { // entry point
         final String 닿소리 = "ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ";
         final String 홀소리 = "ㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣ";
         final String[] 한글 = { 홀소리, 닿소리 };
