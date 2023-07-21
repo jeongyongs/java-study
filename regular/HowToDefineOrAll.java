@@ -1,6 +1,5 @@
 package regular;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,16 +27,11 @@ public class HowToDefineOrAll {
     }
 
     public static Expression orStream(String literals) { // onStream
-        List<Expression> expressionList = new ArrayList<Expression>();
-
-        for (int i = 0, n = literals.length(); i < n; i++) {
-            expressionList.add(new Literal(literals.charAt(i)));
-        }
-        return orStream(expressionList.stream());
+        return orStream(literals.chars().mapToObj(integer -> (new Literal((char) integer))));
     }
 
     public static Expression orStream(Stream<Expression> expressions) { // onStream
-        return expressions.reduce(Epsilon.getInstance(), (e1, e2) -> e1.or(e2));
+        return expressions.reduce(Epsilon.getInstance(), Expression::or);
     }
 
     private static <ReturnType> ReturnType operationWithElapsedTimeInMillis(

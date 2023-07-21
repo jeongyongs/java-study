@@ -7,7 +7,7 @@ public final class Epsilon implements Expression {
     private Epsilon() { // constructor
     }
 
-    public static Epsilon getInstance() { // singleton pattern
+    public static synchronized Epsilon getInstance() { // singleton pattern
         if (instance == null) {
             instance = new Epsilon();
         }
