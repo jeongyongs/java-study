@@ -10,16 +10,7 @@ class Solution {
             answer++;
 
             for (int i = 0; i < arr.length; i++) {
-                if (arr[i] >= 50 && arr[i] % 2 == 0) {
-                    arr[i] /= 2;
-                    isChanged = true;
-                    continue;
-                }
-                if (arr[i] < 50 && arr[i] % 2 != 0) {
-                    arr[i] = arr[i] * 2 + 1;
-                    isChanged = true;
-                    continue;
-                }
+                isChanged = changeValue(arr, isChanged, i);
             }
             if (!isChanged) {
                 answer--;
@@ -29,6 +20,37 @@ class Solution {
 
         return answer;
     }
+
+    private boolean changeValue(int[] arr, boolean isChanged, int i) {
+        Predicate firstCondition = value -> value >= 50 && value % 2 == 0;
+        Operation firstOperation = value -> value / 2;
+        Predicate secondCondition = value -> value < 50 && value % 2 != 0;
+        Operation secondOperation = value -> value * 2 + 1;
+
+        if (changeValueWithCondition(firstCondition, firstOperation, arr, i)) {
+            return true;
+        }
+        if (changeValueWithCondition(secondCondition, secondOperation, arr, i)) {
+            return true;
+        }
+        return isChanged;
+    }
+
+    private boolean changeValueWithCondition(Predicate predicate, Operation operation, int[] arr, int i) {
+        if (predicate.test(arr[i])) {
+            arr[i] = operation.operate(arr[i]);
+            return true;
+        }
+        return false;
+    }
+}
+
+interface Predicate {
+    boolean test(int value);
+}
+
+interface Operation {
+    int operate(int value);
 }
 
 class Test {
