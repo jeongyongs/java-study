@@ -1,61 +1,43 @@
 package usecases;
 
-class Solution {
+class ImperativeCalculator {
 
-    public int solution(int[] arr) {
-        int answer = 0;
+    private int result;
 
-        while (true) {
-            boolean isChanged = false;
-            answer++;
-
-            for (int i = 0; i < arr.length; i++) {
-                isChanged = changeValue(arr, isChanged, i);
-            }
-            if (!isChanged) {
-                answer--;
-                break;
-            }
-        }
-
-        return answer;
+    public ImperativeCalculator() {
+        this.result = 0;
     }
 
-    private boolean changeValue(int[] arr, boolean isChanged, int i) {
-        Predicate firstCondition = value -> value >= 50 && value % 2 == 0;
-        Operation firstOperation = value -> value / 2;
-        Predicate secondCondition = value -> value < 50 && value % 2 != 0;
-        Operation secondOperation = value -> value * 2 + 1;
-
-        if (changeValueWithCondition(firstCondition, firstOperation, arr, i)) {
-            return true;
-        }
-        if (changeValueWithCondition(secondCondition, secondOperation, arr, i)) {
-            return true;
-        }
-        return isChanged;
+    public void add(int num) {
+        this.result += num;
     }
 
-    private boolean changeValueWithCondition(Predicate predicate, Operation operation, int[] arr, int i) {
-        if (predicate.test(arr[i])) {
-            arr[i] = operation.operate(arr[i]);
-            return true;
-        }
-        return false;
+    public void subtract(int num) {
+        this.result -= num;
     }
-}
 
-interface Predicate {
-    boolean test(int value);
-}
+    public void multiply(int num) {
+        this.result *= num;
+    }
 
-interface Operation {
-    int operate(int value);
-}
+    public void divide(int num) {
+        if (num != 0) {
+            this.result /= num;
+        } else {
+            throw new IllegalArgumentException("Cannot divide by zero.");
+        }
+    }
 
-class Test {
+    public int getResult() {
+        return this.result;
+    }
+
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        System.out.println(solution.solution(new int[] { 1, 2, 3, 100, 99, 98 }));
+        ImperativeCalculator calculator = new ImperativeCalculator();
+        calculator.add(5);
+        calculator.multiply(2);
+        calculator.subtract(3);
+        calculator.divide(2);
+        System.out.println("Result: " + calculator.getResult());
     }
 }
