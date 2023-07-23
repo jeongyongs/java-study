@@ -1,43 +1,46 @@
 package usecases;
 
-class ImperativeCalculator {
+class Calculator {
 
-    private int result;
+    private final int value;
 
-    public ImperativeCalculator() {
-        this.result = 0;
+    public Calculator(int value) {
+        this.value = value;
     }
 
-    public void add(int num) {
-        this.result += num;
+    public Calculator add(int num) {
+        return new Calculator(this.value + num);
     }
 
-    public void subtract(int num) {
-        this.result -= num;
+    public Calculator subtract(int num) {
+        return new Calculator(this.value - num);
     }
 
-    public void multiply(int num) {
-        this.result *= num;
+    public Calculator multiply(int num) {
+        return new Calculator(this.value * num);
+
     }
 
-    public void divide(int num) {
+    public Calculator divide(int num) {
         if (num != 0) {
-            this.result /= num;
-        } else {
-            throw new IllegalArgumentException("Cannot divide by zero.");
+            return new Calculator(this.value / num);
         }
+        throw new IllegalArgumentException("Cannot divide by zero.");
     }
 
-    public int getResult() {
-        return this.result;
+    public int getValue() {
+        return this.value;
     }
 
     public static void main(String[] args) {
-        ImperativeCalculator calculator = new ImperativeCalculator();
-        calculator.add(5);
-        calculator.multiply(2);
-        calculator.subtract(3);
-        calculator.divide(2);
-        System.out.println("Result: " + calculator.getResult());
+        Calculator calculator = new Calculator(0);
+
+        int result = calculator.add(5)
+                .multiply(2)
+                .subtract(3)
+                .divide(2)
+                .getValue();
+
+        System.out.println("Result: " + result);
     }
 }
